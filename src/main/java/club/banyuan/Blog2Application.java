@@ -24,8 +24,10 @@ public class Blog2Application {
 
 
         BlogDao blogDao=context.getBean(BlogDao.class);
-        List<Blog> blogs=blogDao.selectBlogByUserName("李四");
-        System.out.println(blogs.toString());
+        Blog blog = blogDao.getBlogDetail(194);
+        System.out.println(blog);
 
+        List<Blog> blogs=blogDao.selectBlogByUserName("aa");
+        System.out.println(blogs);
     }
 }

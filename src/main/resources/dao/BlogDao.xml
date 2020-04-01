@@ -2,8 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="club.banyuan.dao.BlogDao">
-    <select id="selectBlogByUserName" resultType="club.banyuan.bean.Blog">
-        SELECT b.* FROM blog AS b JOIN `user` AS `u` ON b.user_id = u.id WHERE u.name = #{username}
+    <resultMap id="BlogInfo" type="club.banyuan.bean.Blog" autoMapping="true">
+        <id property="id" column="id"></id>
+        <association property="author" javaType="club.banyuan.bean.User" autoMapping="true" columnPrefix="author_">
+        </association>
+        <collection property="comments" ofType="club.banyuan.bean.Comment"
+                    columnPrefix="comment_" autoMapping="true" >
+<!--            <id property="id" column="id"></id>-->
+<!--            <id property="createdTime" column="created_time"></id>-->
+            <association property="commenter" javaType="club.banyuan.bean.User"
+                         autoMapping="true" columnPrefix="commenter_">
+                <id property="id" column="id"></id>
+
+            </association>
+        </collection>
+    </resultMap>
+    <select id="getBlogDetail" resultMap="BlogInfo">
+         select blog.id, blog.title, blog.content, blog.created_time, blog.user_id ,
+        commenter.name as comment_commenter_name, commenter.email as comment_commenter_email ,
+        commenter.password as comment_commenter_password,
+        comment.content as comment_content,
+        comment.id as comment_id,
+        comment.created_time as comment_created_time,
+        comment.blog_id as comment_blog_id,
+        comment.user_id as comment_comenter_id
+        from blog left join comment on comment.blog_id = blog.id
+        left join user as commenter on comment.user_id = commenter.id where blog.id = #{id}
+    </select>
+
+    <select id="selectBlogByUserName" resultMap="BlogInfo">
+         select blog.id,blog.title,blog.content,blog.created_time,
+        blog.user_id,user.id as author_id,user.name as author_name,
+        user.password as author_password,user.email as author_email
+        from blog
+        left join user on blog.user_id = user.id where user.name = #{username}
     </select>
     <select id="selectBlogById" resultType="club.banyuan.bean.Blog">
         SELECT * FROM blog WHERE id = #{id}

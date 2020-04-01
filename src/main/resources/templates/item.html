@@ -125,7 +125,7 @@
                     </form>
                 </div>
                 <ul class="list-unstyled">
-                    <li class="clearfix content comment-item" th:each="comment: ${comments}">
+                    <li class="clearfix content comment-item" th:each="comment: ${blog.comments}">
                         <img src="/img/catty.jpeg" alt="" class="avatar pull-left">
                         <!--<div class="blog-post" th:each="blog: ${blogs.content}">
                           <h3 class="blog-post-title"><a th:text="${blog.title}" th:href="@{'/blogs/' + ${blog.id}}">"${blog.title}"</a></h3>
@@ -133,7 +133,7 @@
                           <p class="blog-post-content" th:text="${blog.content}">"${blog.content}"</p>
                           -->
                         <p>
-                            <a href="#" th:text="${comment.userId}">"${comment.userId}",</a>
+                            <a href="#" th:text="${comment.commenter.name}">"${comment.commenter.name}",</a>
                             <span class="text-muted date"
                                   th:text="${comment.createdTime}"> "${comment.createdTime}"</span>
                             <textarea disabled th:text="${comment.content}">"${comment.content}"</textarea>

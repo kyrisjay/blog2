@@ -1,17 +1,19 @@
 package club.banyuan.bean;
 
-import java.util.Date;
+import lombok.Data;
 
+import java.util.Date;
+import java.util.List;
+
+@Data
 public class Blog {
     private Integer id;
     private String title;
     private String content;
     private Date createdTime;
-    private Integer userId;
-
-
-    public Blog() {
-    }
+//    private Integer userId;
+    private User Author;
+    private List<Comment> comments;
 
     public Integer getId() {
         return id;
@@ -45,22 +47,19 @@ public class Blog {
         this.createdTime = createdTime;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getAuthor() {
+        return Author;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setAuthor(User author) {
+        Author = author;
     }
 
-    @Override
-    public String toString() {
-        return "Blog{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", createdTime=" + createdTime +
-                ", userId=" + userId +
-                '}';
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
