@@ -23,4 +23,16 @@ public class BlogService {
     public List<Blog> showAuthorBlogs(String name) {
         return blogDao.selectBlogByUserName(name);
     }
+
+    public Integer addBlog(Blog blog) {
+        blogDao.insertBlog(blog);
+        return blog.getId();
+    }
+
+    public void deleteBlog(Integer id){
+        blogDao.deleteBlogById(id);
+    }
+    public void updateBlog(Integer id,Blog blog){
+        blogDao.update(id,blog);
+    }
 }

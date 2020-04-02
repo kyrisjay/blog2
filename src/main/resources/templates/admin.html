@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="./list.html">Lorem 的博客</a>
+            <a class="navbar-brand" href="./list.html" th:text="${user.name}+'的博客'">Lorem 的博客</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -49,7 +49,7 @@
             <strong>Ha!</strong> 注册成功了,开始创建你的博客吧!
         </div>
 
-        <h1 class="blog-title">Lorem 的博客
+        <h1 class="blog-title" th:text="${user.name}+'的博客'">Lorem 的博客
             <small class="blog-description">Mi nunc congue nunc, ante felis vestibulum bibendum.</small>
         </h1>
     </div>
@@ -75,7 +75,7 @@
                     </td>
                     <td>
                         <a class="btn btn-primary blog-post-edit-btn"
-                           th:href="@{'/blogs/' + ${blog.id} + '/edit'}">编辑</a>
+                           th:href="@{'/blog/' + ${blog.id}+'/edit'}">编辑</a>
                         <form class="blog-post-delete-form" th:action="|/blog/${blog.id}|" method="post"
                               onsubmit="return confirm('确定要删除这篇文章吗？');">
                             <input type="hidden" name="_method" value="delete">
@@ -106,10 +106,10 @@
                 -->
 
                 <li th:if="${blogs.hasPreviousPage}" class="previous"><a
-                        th:href="@{'/admin/'+ ${username} + '?page=' + ${blogs.prePage}}"><span aria-hidden="true">&larr;</span>
+                        th:href="@{'/admin?page=' + ${blogs.prePage}}"><span aria-hidden="true">&larr;</span>
                     上一页</a></li>
                 <li th:if="${blogs.hasNextPage}" class="next"><a
-                        th:href="@{'/admin/'+ ${username} + '?page=' + ${blogs.nextPage}}">下一页 <span aria-hidden="true">&rarr;</span></a>
+                        th:href="@{'/admin?page=' + ${blogs.nextPage}}">下一页 <span aria-hidden="true">&rarr;</span></a>
                 </li>
 
             </ul>

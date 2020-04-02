@@ -8,9 +8,14 @@ import java.util.List;
 
 @Repository
 public interface BlogDao {
-    List<Blog>  selectBlogByUserName(String username);
-//    List<Blog> selectBlogByUsernameWithPageInfo(String username, Integer offset, Integer limit);
+    List<Blog> selectBlogByUserName(String username);
+
+    //    List<Blog> selectBlogByUsernameWithPageInfo(String username, Integer offset, Integer limit);
     Blog selectBlogById(Integer id);
+
     Blog getBlogDetail(Integer id);
 
+    void insertBlog(Blog blog);
+    void deleteBlogById(Integer id);
+    void update(Integer id,Blog blog);
 }

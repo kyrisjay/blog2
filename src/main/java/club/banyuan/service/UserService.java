@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     private UserDao userDao;
-    public User UserService(String name) {
+
+    public User findUserByName(String name) {
         return userDao.selectUserByName(name);
     }
 }

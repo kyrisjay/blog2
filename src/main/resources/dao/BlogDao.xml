@@ -19,14 +19,18 @@
     </resultMap>
     <select id="getBlogDetail" resultMap="BlogInfo">
          select blog.id, blog.title, blog.content, blog.created_time, blog.user_id ,
-        commenter.name as comment_commenter_name, commenter.email as comment_commenter_email ,
-        commenter.password as comment_commenter_password,
+        author.id as author_id,author.name as author_name,
+        author.password as author_password,author.email as author_email,
+        comment.id as comment_id,comment.created_time as comment_created_time,
         comment.content as comment_content,
-        comment.id as comment_id,
-        comment.created_time as comment_created_time,
+        comment.user_id as comment_user_id,
         comment.blog_id as comment_blog_id,
-        comment.user_id as comment_comenter_id
-        from blog left join comment on comment.blog_id = blog.id
+        commenter.id as comment_commenter_id,
+        commenter.name as comment_commenter_name,
+        commenter.password as comment_commenter_password,
+        commenter.email as comment_commenter_email
+        from blog join user as author on blog.user_id = author.id
+         left join comment on  blog.id = comment.blog_id
         left join user as commenter on comment.user_id = commenter.id where blog.id = #{id}
     </select>
 
@@ -46,6 +50,13 @@
         </selectKey>
         INSERT INTO blog(title,content,user_id)
             VALUES
-            (#{title},#{content},#{userId})
+            (#{title},#{content},#{author.id})
     </insert>
+    
+    <delete id="deleteBlogById" >
+        DELETE FROM blog WHERE id=#{id}
+    </delete>
+    <update id="update">
+        UPDATE blog SET title=#{blog.title},content=#{blog.content} WHERE `id`=#{id}
+    </update>
 </mapper>

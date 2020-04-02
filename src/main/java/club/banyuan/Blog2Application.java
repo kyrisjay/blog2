@@ -3,6 +3,7 @@ package club.banyuan;
 
 
 import club.banyuan.bean.Blog;
+import club.banyuan.bean.User;
 import club.banyuan.dao.BlogDao;
 import club.banyuan.dao.UserDao;
 import org.mybatis.spring.annotation.MapperScan;
@@ -20,7 +21,8 @@ public class Blog2Application {
         ApplicationContext context = SpringApplication.run(Blog2Application.class, args);
 
         UserDao userDao=context.getBean(UserDao.class);
-        System.out.println(userDao.selectUserByName("aa").toString());
+        User user1=userDao.selectUserByName("aa");
+        System.out.println(user1.toString());
 
 
         BlogDao blogDao=context.getBean(BlogDao.class);
@@ -29,5 +31,13 @@ public class Blog2Application {
 
         List<Blog> blogs=blogDao.selectBlogByUserName("aa");
         System.out.println(blogs);
+
+//        Blog blog1=new Blog();
+//        blog1.setTitle("4-2");
+//        blog1.setContent("4月2日的blog......");
+//        blog1.setAuthor(user1);
+//        blogDao.insertBlog(blog1);
+//        System.out.println("新插入的blogId是:"+blog1.getId());
+
     }
 }
