@@ -2,6 +2,8 @@ package club.banyuan.service;
 
 import club.banyuan.bean.Blog;
 import club.banyuan.dao.BlogDao;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,4 +37,9 @@ public class BlogService {
     public void updateBlog(Integer id,Blog blog){
         blogDao.update(id,blog);
     }
+
+    public PageInfo<Blog> showBlogs(Integer page,Integer size){
+        PageHelper.startPage(page,size);
+        return new PageInfo<Blog>(blogDao.getAllBlogs());}
+
 }

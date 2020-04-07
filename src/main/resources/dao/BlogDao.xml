@@ -41,6 +41,15 @@
         from blog
         left join user on blog.user_id = user.id where user.name = #{username}
     </select>
+
+    <select id="getAllBlogs" resultMap="BlogInfo">
+         select blog.id,blog.title,blog.content,blog.created_time,
+        blog.user_id,user.id as author_id,user.name as author_name,
+        user.password as author_password,user.email as author_email
+        from blog
+        left join user on blog.user_id = user.id ORDER BY  blog.id DESC
+    </select>
+
     <select id="selectBlogById" resultType="club.banyuan.bean.Blog">
         SELECT * FROM blog WHERE id = #{id}
     </select>
@@ -59,4 +68,6 @@
     <update id="update">
         UPDATE blog SET title=#{blog.title},content=#{blog.content} WHERE `id`=#{id}
     </update>
+
+
 </mapper>
