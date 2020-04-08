@@ -13,4 +13,15 @@ public class UserService {
     public User findUserByName(String name) {
         return userDao.selectUserByName(name);
     }
+
+    public void updatePasswd(String newPasswd, Integer id) {
+        userDao.updatePasswd(newPasswd, id);
+    }
+    public void updateAvatarById(Integer id, String avatarPath) {
+        userDao.updateAvatar(id, avatarPath);
+    }
+
+    public User getUserById(Integer id) {
+        return userDao.getUserById(id);
+    }
 }

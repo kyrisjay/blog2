@@ -5,4 +5,13 @@
     <select id="selectUserByName" resultType="club.banyuan.bean.User">
         SELECT * FROM `user` WHERE `name` = #{username}
     </select>
+    <update id="updatePasswd">
+        UPDATE user SET password=#{passwd} where `id` = #{id}
+    </update>
+    <update id="updateAvatar">
+        UPDATE user SET avatar=#{avatarPath} where `id` = #{id}
+    </update>
+    <select id="getUserById" resultType="club.banyuan.bean.User">
+        SELECT * FROM user WHERE `id` = #{id}
+    </select>
 </mapper>
