@@ -17,13 +17,14 @@ import java.security.Principal;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
     @Autowired
     private BlogService blogService;
     @Autowired
     UserService userService;
 
-    @GetMapping("/admin")
+    @GetMapping("")
     String showAdminPage(Principal principal, Model model) {
         String userName = principal.getName();
         User user = userService.findUserByName(userName);

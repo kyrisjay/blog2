@@ -26,26 +26,26 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/login")
-    String login(@RequestParam String username,
-                 @RequestParam String password,
-                 HttpSession session) {
-        //check user valid
-        User user = userService.findUserByName(username);
-        if (user != null && user.getPassword().equals(password)) {
-            session.setAttribute("USER", user);
-            String next = (String) session.getAttribute("NEXT");
-
-            if (next == null) {
-                return "redirect:/admin";
-            } else {
-                session.removeAttribute("NEXT");
-                return "redirect:".concat(next);
-            }
-        } else {
-            return "redirect:/login";
-        }
-    }
+//    @PostMapping("/login")
+//    String login(@RequestParam String username,
+//                 @RequestParam String password,
+//                 HttpSession session) {
+//        //check user valid
+//        User user = userService.findUserByName(username);
+//        if (user != null && user.getPassword().equals(password)) {
+//            session.setAttribute("USER", user);
+//            String next = (String) session.getAttribute("NEXT");
+//
+//            if (next == null) {
+//                return "redirect:/admin";
+//            } else {
+//                session.removeAttribute("NEXT");
+//                return "redirect:".concat(next);
+//            }
+//        } else {
+//            return "redirect:/login";
+//        }
+//    }
 
     @PostMapping("/login/change-password")
     String changePassword(HttpSession session,
